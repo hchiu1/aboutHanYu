@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Han-Yu Chiu</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, Arial, sans-serif;
+            background-color: #F3E9E3;
+            color: #5E5A55;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 40px 0;
+            background-color: #D3C1B8;
+            border-radius: 20px;
+        }
+        .profile-pic {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #B9C2C7;
+            margin: 0 auto 20px auto;
+            display: block;
+        }
+        .username {
+            font-size: 28px;
+            font-weight: bold;
+            margin: 10px 0;
+            color: white;
+        }
+        .title-text {
+            font-size: 16px;
+            color: white;
+            margin: 10px 0;
+            line-height: 1.5;
+        }
+        .separator {
+            font-size: 12px;
+            color: #E9DED8;
+            margin: 0 8px;
+            vertical-align: middle;
+        }
+        .bio {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 0 20px;
+            font-size: 16px;
+            color: #635E59;
+        }
+        .section {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .tab-container {
+            margin-bottom: 30px;
+        }
+        .tab-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            padding: 10px;
+            background-color: #F9F6F4;
+            border-radius: 15px;
+        }
+        .tab-button {
+            padding: 12px 24px;
+            background-color: transparent;
+            border: 2px solid #D3C1B8;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 16px;
+            font-weight: 500;
+            color: #635E59;
+            min-width: 140px;
+            text-align: center;
+        }
+        .tab-button:hover {
+            background-color: #E9DED8;
+            transform: translateY(-2px);
+        }
+        .tab-button.active {
+            background-color: #D3C1B8;
+            color: white;
+            border-color: #D3C1B8;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .list-item {
+            margin-bottom: 15px;
+            padding: 15px;
+            background-color: #F9F6F4;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+        .list-item:hover {
+            transform: translateX(5px);
+            background-color: #F0E6E0;
+        }
+        .item-title {
+            font-weight: bold;
+            color: #4A4745;
+            margin-bottom: 5px;
+        }
+        .item-date {
+            font-size: 14px;
+            color: #8C8883;
+            margin-bottom: 8px;
+        }
+        .item-description {
+            color: #635E59;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        .skill-category {
+            background-color: #F9F6F4;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .skill-category h3 {
+            color: #635E59;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        .skill-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .skill-list li {
+            margin-bottom: 10px;
+            padding: 8px 0;
+            color: #635E59;
+        }
+        .contact-info {
+            text-align: center;
+            margin-top: 30px;
+            color: #635E59;
+        }
+        .contact-info a {
+            color: #635E59;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .contact-info a:hover {
+            color: #B9C2C7;
+        }
+        .text-level {
+            font-size: 14px;
+            color: #8C8883;
+            margin-left: 4px;
+}
+        @media (max-width: 768px) {
+            .tab-buttons {
+                gap: 10px;
+                padding: 8px;
+            }
+            .tab-button {
+                padding: 10px 20px;
+                font-size: 14px;
+                min-width: calc(50% - 10px);
+                flex: 1 1 calc(50% - 10px);
+            }
+            .skills-container {
+                grid-template-columns: 1fr;
+            }
+            .title-text {
+                font-size: 14px;
+            }
+            .separator {
+                font-size: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 10px;
+            }
+            .header {
+                padding: 20px 0;
+            }
+            .tab-buttons {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .tab-button {
+                width: 100%;
+                min-width: unset;
+            }
+            .title-text {
+                font-size: 13px;
+            }
+            .separator {
+                font-size: 9px;
+                margin: 0 4px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="images/profile.jpg" alt="Han-Yu Chiu" class="profile-pic">
+            <h1 class="username">Han-Yu Chiu</h1>
+            <p class="title-text">
+                Clinical Psychology <span class="separator">╳</span> Criminal Justice <span class="separator">╳</span> Humanitarianism
+            </p>
+        </div>
+        
+        <div class="bio">
+            <p>Master's in Criminal Justice | Graduate Certificate in Forensic Mental Health</p>
+            <p>Specializing in psychological assessment, cognitive rehabilitation, and minority group mental health</p>
+        </div>
+
+        <div class="section">
+            <div class="tab-container">
+                <div class="tab-buttons">
+                    <button class="tab-button active" onclick="openTab(event, 'experience')">Experience</button>
+                    <button class="tab-button" onclick="openTab(event, 'skills')">Skills</button>
+                    <button class="tab-button" onclick="openTab(event, 'awards')">Awards</button>
+                    <button class="tab-button" onclick="openTab(event, 'activities')">Activities</button>
+                </div>
+
+                <!-- Experience Tab -->
+                <div id="experience" class="tab-content active">
+                    <div class="list-item">
+                        <div class="item-title">Mental Health Counselor - Lu-Dong Primary School</div>
+                        <div class="item-date">2023-Present</div>
+                        <div class="item-description">
+                            • Teaching "Mental Health of Internet Addiction"<br>
+                            • Provide counseling services and behavioral assessments<br>
+                            • Implement individualized support and prevention strategies
+                        </div>
+                    </div>
+                
+                    <div class="list-item">
+                        <div class="item-title">Research Intern - Henry Lee Institute of Forensic Science</div>
+                        <div class="item-date">Jan 2023</div>
+                        <div class="item-description">
+                            • Studied under Dr. Henry C. Lee's mentorship in forensic science<br>
+                            • Integrated psychological principles with forensic applications<br>
+                            • Developed cross-cultural perspectives in forensic science
+                        </div>
+                    </div>
+                
+                    <div class="list-item">
+                        <div class="item-title">Mental Health Counselor - China University of Technology</div>
+                        <div class="item-date">2020-2021</div>
+                        <div class="item-description">
+                            • Supported students with disabilities in various aspects of adjustment<br>
+                            • Conducted assessments and created individualized education plans<br>
+                            • Provided comprehensive mental health support services
+                        </div>
+                    </div>
+                
+                    <div class="list-item">
+                        <div class="item-title">Case Manager - Mental Health Clinic, Tzu Chi Hospital</div>
+                        <div class="item-date">2019-2020</div>
+                        <div class="item-description">
+                            • Conducted assessments for substance abuse clients<br>
+                            • Performed motivational interviews and treatment monitoring<br>
+                            • Maintained regular contact with clients
+                        </div>
+                    </div>
+                </div>
+
+             <!-- Skills Tab -->
+<div id="skills" class="tab-content">
+    <div class="skills-container">
+        <div class="skill-category">
+            <h3>Technical Skills</h3>
+            <ul class="skill-list">
+                <li>• R Programming</li>
+                <li>• SPSS Statistical Analysis</li>
+                <li>• DMDX</li>
+                <li>• C-LIWC</li>
+                <li>• NVivo</li>
+                <li>• GitHub <span class="text-level">Beginner</span></li>
+                <li>• HTML <span class="text-level">Beginner</span></li>
+            </ul>
+        </div>
+        <div class="skill-category">
+            <h3>Languages</h3>
+            <ul class="skill-list">
+                <li>• English <span class="text-level">Proficient</span></li>
+                <li>• Mandarin <span class="text-level">Native</span></li>
+                <li>• Spanish <span class="text-level">Beginner</span></li>
+            </ul>
+        </div>
+        <div class="skill-category">
+            <h3>Clinical Skills</h3>
+            <ul class="skill-list">
+                <li>• Psychological Assessment</li> 
+                <li>• Stroke/Brain injury Assessment</li>
+                <li>• Cognitive Behavioral Therapy </li>
+                <li>• Mental Health Counseling</li>
+                <li>• Rehabilitation</li>
+                <li>• Motivational Interviewing</li>
+            </ul>
+        </div>
+        <div class="skill-category">
+            <h3>Research Skills</h3>
+            <ul class="skill-list">
+                <li>• Qualitative Research</li>
+                <li>• Data Analysis</li>
+                <li>• Research Design</li>
+                <li>• Scientific Writing</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div id="awards" class="tab-content">
+    <div class="list-item">
+        <div class="item-title">Dean's Scholarship</div>
+        <div class="item-date">2021-2023</div>
+        <div class="item-description">
+            University of New Haven (US$10,854 in total funds)
+        </div>
+    </div>
+
+    <div class="list-item">
+        <div class="item-title">Special Topic Poster Award, First Place</div>
+        <div class="item-date">2018</div>
+        <div class="item-description">CYCU Psychology Department</div>
+    </div>
+
+    <div class="list-item">
+        <div class="item-title">Overseas Learning-Service Team Award, Gold Medal</div>
+        <div class="item-date">2018</div>
+        <div class="item-description">Youth Development Administration, Ministry of Education</div>
+    </div>
+</div>
+                <!-- Activities Tab -->
+                <div id="activities" class="tab-content">
+                    <div class="list-item">
+                        <div class="item-title">Vice President - Taiwanese Student Association</div>
+                        <div class="item-date">2022-2023</div>
+                        <div class="item-description">University of New Haven</div>
+                    </div>
+                
+                    <div class="list-item">
+                        <div class="item-title">President - Taiwanese Student Association</div>
+                        <div class="item-date">2021-2022</div>
+                        <div class="item-description">University of New Haven</div>
+                    </div>
+                
+                    <div class="list-item">
+                        <div class="item-title">Team Leader - Overseas Service-Learning Volunteer</div>
+                        <div class="item-date">Jul. 2017 - Aug. 2017</div>
+                        <div class="item-description">
+                            • Collaborated with Cambodia Ministry of Education<br>
+                            • Improved English teaching skills for elementary teachers<br>
+                            • Taught computer skills to young job seekers
+                        </div>
+                    </div>
+                </div>
+
+        <div class="contact-info">
+            <p>📧 <a href="mailto:hchiu1996@gmail.com">hchiu1996@gmail.com</a></p>
+            <p>📍 Kaohsiung City, Taiwan</p>
+        </div>
+    </div>
+
+    <script>
+        function openTab(evt, tabName) {
+            var i, tabcontent, tabbuttons;
+            
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+
+            tabbuttons = document.getElementsByClassName("tab-button");
+            for (i = 0; i < tabbuttons.length; i++) {
+                tabbuttons[i].className = tabbuttons[i].className.replace(" active", "");
+            }
+
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+    </script>
+</body>
+</html>
